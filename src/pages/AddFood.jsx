@@ -21,6 +21,18 @@ const AddFood = () => {
     }))
   }
 
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    if(!image){
+      alert('Please select an image');
+    }
+
+    const formData = new FormData();
+
+    formData.append('food', JSON.stringify(data));
+    formData.append('file', image);
+  }
+
   // useEffect(() => {
   //   console.log(data);
   // }, [data])
@@ -31,7 +43,7 @@ const AddFood = () => {
         <div className="card col-md-4">
           <div className="card-body">
             <h2 className="mb-4">Add Food</h2>
-            <form>
+            <form onSubmit={onSubmitHandler}>
               <div className="mb-3">
                 <label for="image" className="form-label">
                   <img src={image ? URL.createObjectURL(image): assets.upload} height={80} width={80}></img>
